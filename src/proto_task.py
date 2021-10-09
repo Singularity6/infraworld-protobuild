@@ -53,6 +53,13 @@ class ProtoTask:
         gen_transport = config['transport']
         options = [path_to_proto_compiler, f'-I={include_dir}']
 
+        # s6fix @bernst - Allow an includes list in the protobuild.yml file to forward include directories for protoc to search.
+        if config['includes'] is not None:
+            for include in config['includes']:
+                include_adj = PathConverter.to_absolute(proto_root, include)
+                options.append(f'-I={include_adj}')
+        # s6fix_end
+
         path_to_plugin = os.path.join(programs_root, Misc.add_exec_suffix(Misc.plugin_for_lang(self.lang)))
 
         if 'protoc_options' in config.options.keys():
