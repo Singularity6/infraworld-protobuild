@@ -13,6 +13,9 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 #
+
+# Modified 2021 by Singularity 6, Inc.
+
 import os
 
 from colorama import Fore
