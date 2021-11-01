@@ -13,6 +13,9 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 #
+
+# Modified 2021 by Singularity 6, Inc.
+
 import os
 
 from colorama import Fore
@@ -52,6 +55,11 @@ class ProtoTask:
 
         gen_transport = config['transport']
         options = [path_to_proto_compiler, f'-I={include_dir}']
+
+        if config['includes'] is not None:
+            for include in config['includes']:
+                include_adj = PathConverter.to_absolute(proto_root, include)
+                options.append(f'-I={include_adj}')
 
         path_to_plugin = os.path.join(programs_root, Misc.add_exec_suffix(Misc.plugin_for_lang(self.lang)))
 
