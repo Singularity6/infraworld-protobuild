@@ -94,5 +94,5 @@ class Config:
     @staticmethod
     def load(path: str):
         with open(path, 'r') as stream:
-            yaml_config = yaml.load(stream)
+            yaml_config = yaml.safe_load(stream)
             return Config(path, yaml_config)
